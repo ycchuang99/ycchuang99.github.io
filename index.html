@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Website</title>
+    <title>Evan Chuang - Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --text-color: #333;
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --highlight-color: #e94560;
+            --text-color: #2d3436;
             --light-bg: #f8f9fa;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
         }
 
         * {
@@ -19,9 +25,10 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
+            background-color: var(--light-bg);
         }
 
         .container {
@@ -31,15 +38,47 @@
         }
 
         header {
-            background-color: var(--primary-color);
+            background: var(--gradient);
             color: white;
-            padding: 2rem 0;
+            padding: 4rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
         }
 
         nav {
             background-color: var(--secondary-color);
             padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         nav ul {
@@ -52,34 +91,85 @@
         nav a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--highlight-color);
+            transform: translateY(-2px);
         }
 
         section {
-            padding: 4rem 0;
+            padding: 6rem 0;
+            position: relative;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--highlight-color);
+            margin: 1rem auto;
+            border-radius: 2px;
         }
 
         .intro {
-            background-color: var(--light-bg);
+            background-color: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            margin: -3rem auto;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 3rem;
+        }
+
+        .intro .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .intro p {
+            margin-bottom: 1.5rem;
         }
 
         .projects {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            padding: 2rem 0;
         }
 
         .project-card {
             background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
         .research-notes {
@@ -88,18 +178,66 @@
 
         .note {
             background: white;
-            padding: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .note:hover {
+            transform: translateX(10px);
+        }
+
+        .note h3 {
+            color: var(--accent-color);
             margin-bottom: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 1.5rem;
         }
 
         footer {
-            background-color: var(--primary-color);
+            background: var(--gradient);
             color: white;
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            .intro {
+                margin: -2rem auto;
+                padding: 2rem;
+            }
         }
     </style>
 </head>
@@ -125,16 +263,47 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="content">
-                <!-- Add your introduction here -->
                 <p>Welcome to my personal website! I am a Backend Engineer passionate about writing code.</p>
-                <p>With 3 years of experience in development.</p>
+                <p>With 3 years of experience in development, I specialize in building robust and scalable backend systems. My expertise lies in creating efficient, maintainable, and secure applications that power modern web services.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Project Demos</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>Project 1</h3>
+                    <p>Description of your first project.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Project 2</h3>
+                    <p>Description of your second project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="research-notes">
+        <div class="container">
+            <h2 class="section-title">Research Notes</h2>
+            <div class="notes">
+                <div class="note">
+                    <h3>Research Topic 1</h3>
+                    <p>Summary of your research findings and notes.</p>
+                </div>
+                <div class="note">
+                    <h3>Research Topic 2</h3>
+                    <p>Summary of your research findings and notes.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Evan Chuang. All rights reserved.</p>
+            <p>&copy; 2024 Evan Chuang. All rights reserved.</p>
         </div>
     </footer>
 </body>
